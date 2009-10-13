@@ -2,7 +2,6 @@ module I15R
   class PatternMatcher
 
     def self.inherited(descendant)
-      debugger
       descendant.methods(false).grep /^match/ do |matcher_method|
         descendant.method(matcher_method).call
       end
@@ -28,5 +27,3 @@ module I15R
 
   end
 end
-
-# require File.join(File.dirname(__FILE__), 'pattern_matchers/tag_attribute_matcher')
