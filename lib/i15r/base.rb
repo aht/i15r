@@ -16,7 +16,7 @@ module I15R
       # silenced_if_testing do
       #   puts "#{indent}#{key}: #{text}"
       # end
-      # "#{prefix}.#{key}"
+      "#{prefix}.#{key}"
     end
     
     def initialize
