@@ -18,10 +18,10 @@ module I15R
       # end
       "#{prefix}.#{key}"
     end
-    
+
     def initialize
       @options = OpenStruct.new
-      @options.prefix = nil    
+      @options.prefix = nil
     end
 
     def parse_options(args)
@@ -81,11 +81,11 @@ module I15R
     def internationalize_file(file)
       text = get_content_from(file)
       prefix = self.prefix || file_path_to_message_prefix(file)
-      i18ned_text = internationalize(text, prefix)
+      i18ned_text = sub_plain_strings(text, prefix)
       write_content_to(file, i18ned_text) unless dry_run?
     end
 
-    def internationalize(text, prefix)
+    def display_indented_header(prefix)
       silenced_if_testing do
         puts "en:"
       end
@@ -96,8 +96,14 @@ module I15R
           puts "#{p}"
         end
       end
+    end
 
-      I15R::PatternMatchers::Base.run(text, prefix)
+    def sub_plain_strings(text, prefix)
+      #TODO: find out how to display diff rows
+      I15R::PatternMatchers::Base.run(text, prefix) do |plain_row, i15l_row|
+        puts "- #{plain_row}"
+        puts "+ #{i15l_row}"
+      end
     end
 
     def internationalize!(path)
@@ -116,7 +122,7 @@ module I15R
         $stdout = orig_stdout
       end
     end
-  
+
     def testing?
       $testing
     end
