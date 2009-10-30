@@ -57,7 +57,7 @@ describe I15R::Base do
     before do
       @i15r.options.prefix = nil
       @file_path = "app/views/users/new.html.erb"
-      File.open(@file_path, "w") { |f| f.write("xxx") } 
+      File.open(@file_path, "w") { |f| f.write("<label for=\"user-name\">Name</label>") }
     end
 
     describe "and in dry-run mode" do

@@ -78,6 +78,13 @@ module I15R
       open(File.expand_path(file), "w") { |f| f.write(content) }
     end
 
+    def show_diff(plain_row, i9l_row)
+      silenced_if_testing do
+        $stdout.puts "- #{plain_row}"
+        $stdout.puts "+ #{i9l_row}"
+      end
+    end
+
     def internationalize_file(file)
       text = get_content_from(file)
       prefix = self.prefix || file_path_to_message_prefix(file)
@@ -100,9 +107,8 @@ module I15R
 
     def sub_plain_strings(text, prefix)
       #TODO: find out how to display diff rows
-      I15R::PatternMatchers::Base.run(text, prefix) do |plain_row, i15l_row|
-        puts "- #{plain_row}"
-        puts "+ #{i15l_row}"
+      I15R::PatternMatchers::Base.run(text, prefix) do |plain_row, i9l_row|
+        show_diff(plain_row, i9l_row)
       end
     end
 
