@@ -20,6 +20,18 @@ module I15R
           end
         end
         register_matcher :match_title_attribute
+        
+        def self.match_alt_attribute
+          patt = /^(.*)(<img\s+.*alt=)['"](.*?)['"](.*)/
+          matches(:erb) do |text, prefix|
+            if m = patt.match(text)
+              i18n_string = I15R::Base.get_i18n_message_string(m[3], prefix)
+              i18ned_row = %(#{m[1]}#{m[2]}"<%= _("#{i18n_string}") %>"#{m[4]})
+              [m[0], i18ned_row]
+            end
+          end
+        end
+        register_matcher :match_alt_attribute
       end
     end
   end
