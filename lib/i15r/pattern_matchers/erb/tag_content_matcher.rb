@@ -10,7 +10,7 @@ module I15R
         end
         
         def self.match_tag_content_on_one_line
-          patt = /^(.*)>(\s*)([[:alnum:][:upper:]][\s[:alnum:][:upper:][:punct:]]+)\s*<\/(.*)$/i
+          patt = /^(.*)>(\s*)([^<]+)\s*<\/(.*)$/
           matches(:erb) do |text, prefix|
             if m = patt.match(text)
               i18n_string = I15R::Base.get_i18n_message_string(m[3], prefix)
