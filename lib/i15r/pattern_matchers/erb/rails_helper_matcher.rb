@@ -14,7 +14,7 @@ module I15R
           matches(:erb) do |text, prefix|
             if m = patt.match(text)
               i18n_string = I15R::Base.get_i18n_message_string(m[2], prefix)
-              i18ned_row = %(#{m[1]}<%= link_to I18n.t("#{i18n_string}"),#{m[3]}%>#{m[4]})
+              i18ned_row = %(#{m[1]}<%= link_to _("#{i18n_string}"),#{m[3]}%>#{m[4]})
               [m[0], i18ned_row]
             end
           end
@@ -26,7 +26,7 @@ module I15R
           matches(:erb) do |text, prefix|
             if m = patt.match(text)
               i18n_string = I15R::Base.get_i18n_message_string(m[4], prefix)
-              i18ned_row = %(#{m[1]}<%=#{m[2]}.label#{m[3]}, I18n.t("#{i18n_string}") %>#{m[5]})
+              i18ned_row = %(#{m[1]}<%=#{m[2]}.label#{m[3]}, _("#{i18n_string}") %>#{m[5]})
               [m[0], i18ned_row]
             end
           end
@@ -38,7 +38,7 @@ module I15R
           matches(:erb) do |text, prefix|
             if m = patt.match(text)
               i18n_string = I15R::Base.get_i18n_message_string(m[4], prefix)
-              i18ned_row = %(#{m[1]}<%=#{m[2]}label_tag #{m[3]}, I18n.t("#{i18n_string}") %>#{m[5]})
+              i18ned_row = %(#{m[1]}<%=#{m[2]}label_tag #{m[3]}, _("#{i18n_string}") %>#{m[5]})
               [m[0], i18ned_row]
             end
           end
@@ -50,7 +50,7 @@ module I15R
           matches(:erb) do |text, prefix|
             if m = patt.match(text)
               i18n_string = I15R::Base.get_i18n_message_string(m[3], prefix)
-              i18ned_row = %(#{m[1]}<%=#{m[2]}.submit I18n.t("#{i18n_string}") %>#{m[4]})
+              i18ned_row = %(#{m[1]}<%=#{m[2]}.submit _("#{i18n_string}") %>#{m[4]})
               [m[0], i18ned_row]
             end
           end
@@ -62,7 +62,7 @@ module I15R
           matches(:erb) do |text, prefix|
             if m = patt.match(text)
               i18n_string = I15R::Base.get_i18n_message_string(m[2], prefix)
-              i18ned_row = %(#{m[1]}<%= submit_tag I18n.t("#{i18n_string}") %>#{m[3]})
+              i18ned_row = %(#{m[1]}<%= submit_tag _("#{i18n_string}") %>#{m[3]})
               [m[0], i18ned_row]
             end
           end

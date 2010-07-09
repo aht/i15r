@@ -14,7 +14,7 @@ module I15R
           matches(:erb) do |text, prefix|
             if m = patt.match(text)
               i18n_string = I15R::Base.get_i18n_message_string(m[3], prefix)
-              i18ned_row = %(#{m[1]}#{m[2]}"<%= I18n.t("#{i18n_string}") %>"#{m[4]})
+              i18ned_row = %(#{m[1]}#{m[2]}"<%= _("#{i18n_string}") %>"#{m[4]})
               [m[0], i18ned_row]
             end
           end

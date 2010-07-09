@@ -14,7 +14,7 @@ module I15R
           matches(:haml) do |text, prefix|
             if m = patt.match(text)
               i18n_string = I15R::Base.get_i18n_message_string(m[2], prefix)
-              i18ned_row = %(#{m[1]}= I18n.t("#{i18n_string}"))
+              i18ned_row = %(#{m[1]}= _("#{i18n_string}"))
               [m[0], i18ned_row]
             end
           end
@@ -26,7 +26,7 @@ module I15R
           matches(:haml) do |text, prefix|
             if m = patt.match(text)
               i18n_string = I15R::Base.get_i18n_message_string(m[2], prefix)
-              i18ned_row = %(#{m[1]}I18n.t("#{i18n_string}"))
+              i18ned_row = %(#{m[1]}_("#{i18n_string}"))
               [m[0], i18ned_row]
             end
           end
@@ -38,7 +38,7 @@ module I15R
           matches(:haml) do |text, prefix|
             if m = patt.match(text)
               i18n_string = I15R::Base.get_i18n_message_string(m[2], prefix)
-              i18ned_row = %(#{m[1]}= I18n.t("#{i18n_string}"))
+              i18ned_row = %(#{m[1]}= _("#{i18n_string}"))
               [m[0], i18ned_row]
             end
           end

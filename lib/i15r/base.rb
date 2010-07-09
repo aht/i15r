@@ -10,13 +10,14 @@ module I15R
     def self.get_i18n_message_string(text, prefix)
       #TODO: downcase does not work properly for accented chars, like 'Ú'
       #TODO: [:punct:] would be nice but it includes _ which we don't want to remove
-      key = text.strip.downcase.gsub(/[\s]/, '_').gsub(/[!?.,:"';]/, '')
-      indent = ""
-      (0..prefix.split(".").size).each { |i| indent = "  " + indent }
-      # silenced_if_testing do
-      #   puts "#{indent}#{key}: #{text}"
+      # key = text.strip.downcase.gsub(/[\s]/, '_').gsub(/[!?.,:"';&]/, '')
+      # indent = ""
+      # (0..prefix.split(".").size).each { |i| indent = "  " + indent }
+      # self.silenced_if_testing do
+      #  puts "#{indent}#{key}: #{text}"
       # end
-      "#{prefix}.#{key}"
+      # "#{prefix}.#{key}"
+      text
     end
 
     def initialize
@@ -128,7 +129,6 @@ module I15R
       files.each { |file| internationalize_file(file) }
     end
 
-    private
     def silenced_if_testing
       if testing?
         orig_stdout = $stdout
