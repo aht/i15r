@@ -22,10 +22,10 @@ module I15R
         register_matcher :match_haml_implicit_div_tag_content
 
         def self.match_haml_explicit_tag_content
-          patt = /^(\s*%\w+)\s+(.*)$/
+          patt = /^(\s*%\w+([.#]\w+)*)\s+(.*)$/
           matches(:haml) do |text, prefix|
             if m = patt.match(text)
-              i18n_string = I15R::Base.get_i18n_message_string(m[2], prefix)
+              i18n_string = I15R::Base.get_i18n_message_string(m[3], prefix)
               i18ned_row = %(#{m[1]}= _("#{i18n_string}"))
               [m[0], i18ned_row]
             end
