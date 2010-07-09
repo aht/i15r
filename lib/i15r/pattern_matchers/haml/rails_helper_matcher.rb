@@ -7,6 +7,19 @@ module I15R
           super(text, prefix, :haml)
         end
         
+        def self.match_naked_link_to_title
+          #TODO: allow parens around link_to arguments
+          patt = /^(\s*=\s*)link_to\s+['"](.*?)['"]\s*,(.*)$/
+          matches(:haml) do |text, prefix|
+            if m = patt.match(text)
+              i18n_string = I15R::Base.get_i18n_message_string(m[2], prefix)
+              i18ned_row = %(#{m[1]}link_to _("#{i18n_string}"),#{m[3]})
+              [m[0], i18ned_row]
+            end
+          end
+        end
+        register_matcher :match_naked_link_to_title
+
         def self.match_haml_tag_and_link_to_title
           #TODO: allow parens around link_to arguments
           patt = /^(.*%\w+=\s*)link_to\s+['"](.*?)['"]\s*,(.*)$/
